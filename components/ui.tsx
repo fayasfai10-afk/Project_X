@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { ArrowUpRight, Check, Clock3, MapPin, ShieldCheck, Sparkles, Users } from 'lucide-react';
 import Link from 'next/link';
+import type { Challenge, Partner } from '@/lib/types';
 
 export function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   return <motion.div initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .15 }} transition={{ duration: .55, delay }}>{children}</motion.div>;
@@ -25,7 +26,7 @@ export function StatKpi({ label, value, delta }: { label:string; value:string; d
   return <div className="card kpi"><div className="eyebrow">{label}</div><div className="num">{value}</div><div className="delta">{delta}</div></div>;
 }
 
-export function ChallengeCard({ c }: { c: any }) {
+export function ChallengeCard({ c }: { c: Challenge }) {
   return <motion.div className="card challenge" whileHover={{ y: -5 }} transition={{ type:'spring', stiffness:250, damping:20 }}>
     <div style={{display:'flex',justifyContent:'space-between',gap:12,alignItems:'center'}}><PriorityBadge priority={c.priority}/><span className="eyebrow">{c.id}</span></div>
     <Link href={`/challenges/${c.id}`}><h3>{c.title}</h3></Link>
@@ -35,7 +36,7 @@ export function ChallengeCard({ c }: { c: any }) {
   </motion.div>
 }
 
-export function MatchList({ items, kind }: { items: any[]; kind: string }) {
+export function MatchList({ items, kind }: { items: Partner[]; kind: string }) {
   return <div className="card panel"><div style={{display:'flex',justifyContent:'space-between',alignItems:'center',gap:12,marginBottom:6}}><div><div className="eyebrow">{kind} matching</div><h3 style={{fontSize:26,letterSpacing:'-.04em',margin:'8px 0 0'}}>Best-fit partners</h3></div><Sparkles size={20}/></div>
     {items.map((p) => <div className="match-row" key={p.id}><div><strong>{p.name}</strong><div className="tiny-list">{p.capabilities.map((x:string)=><span className="tiny" key={x}>{x}</span>)}</div><p className="muted" style={{margin:'10px 0 0',fontSize:13}}>{p.reason.join(' · ')}</p></div><div style={{textAlign:'right'}}><div className="match-score">{p.match}%</div><span className="muted" style={{fontSize:11}}>match</span></div></div>)}
   </div>
