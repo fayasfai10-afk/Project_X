@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowRight, Bot, Building2, CheckCircle2, Factory, Gauge, MapPin, Network, Sparkles, University, Users } from 'lucide-react';
+import { ArrowRight, Bot, Sparkles, University } from 'lucide-react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { challenges } from '@/lib/mockData';
